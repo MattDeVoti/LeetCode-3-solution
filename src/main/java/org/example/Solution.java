@@ -5,8 +5,8 @@ import java.util.Set;
 
 public class Solution {
     public static void main(String[] args) {
-        // Longest substring without repeating characters is "abcdlu"
-        System.out.println(new Solution().lengthOfLongestSubstring("abcabcdlubaksa"));
+        // Longest substring without repeating characters is "vsqlptdaz"
+        System.out.println(new Solution().lengthOfLongestSubstring("badvsqlptdaz"));
     }
 
     public int lengthOfLongestSubstring(String s) {
@@ -14,13 +14,20 @@ public class Solution {
 
         int longestSubString = 0;
 
-        for(char c : s.toCharArray()){
-            if(subStringChars.size()==0 || !subStringChars.contains(c)){
-                subStringChars.add(c);
+        int leftPointer = 0;
+        int rightPointer = 0;
+
+        while(rightPointer<s.length()){
+            if(subStringChars.size()==0 || !subStringChars.contains(s.charAt(rightPointer))){
+                subStringChars.add(s.charAt(rightPointer));
+                rightPointer++;
             } else {
-                longestSubString = longestSubString < subStringChars.size() ? subStringChars.size() : longestSubString;
-                subStringChars.clear();
-                subStringChars.add(c);
+                subStringChars.remove(s.charAt(leftPointer));
+                leftPointer++;
+            }
+
+            if((rightPointer-leftPointer)>longestSubString){
+                longestSubString=(rightPointer-leftPointer);
             }
         }
 
